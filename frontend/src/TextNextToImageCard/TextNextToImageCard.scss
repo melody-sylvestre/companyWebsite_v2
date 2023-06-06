@@ -1,0 +1,68 @@
+@import "../styles/_colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/_margins";
+
+* {
+    box-sizing: border-box;
+}
+
+.text_next_to_image_card {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.text_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
+
+    h2 {
+        color: $primary_text_colour;
+        @include standardTitle;
+    }
+
+    p,li {
+        color: $primary_text_colour;
+        @include standardParagraph;
+    }
+
+    li {
+        font-weight: bold;
+    }
+
+    button {
+        @include darkButton;    
+    }
+}
+
+.card_image {
+    object-fit: cover;
+    max-width: 450px;
+}
+
+@media screen and (max-width:800px) {
+    .text_next_to_image_card {
+        margin-left: $side_margins_mobile;
+        margin-right: $side_margins_mobile; 
+        justify-content: center;
+    }
+    
+    .text_container {
+        align-items: center;
+        
+        button {
+            width: 100%;
+        }
+    }
+    .card_image{
+        width: 100%;
+    }
+}

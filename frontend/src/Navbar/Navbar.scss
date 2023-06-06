@@ -1,0 +1,59 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+
+* {
+    box-sizing: border-box;
+}
+
+nav {
+    align-items: center;
+    border-bottom: solid $border_colour 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+}
+
+.logo_container {
+    width: 175px;
+}
+
+.links_container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 350px;
+
+    .link{
+        color: $primary_text_colour;
+        font-family: $main-font;
+        font-size: $paragraph_font_size;
+        text-decoration: none;
+        
+    }
+
+    button{
+        @include lightButton;
+        width: 100px;
+    }    
+}
+
+
+@media screen and (max-width:800px) {
+    .links_container {
+        display: none;
+    }
+    
+    nav{
+       margin-left: 0;
+       margin-right: 0; 
+       justify-content: center;
+    }
+
+}

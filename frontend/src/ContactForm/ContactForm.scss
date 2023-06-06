@@ -1,0 +1,145 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+
+* {
+    font-family: $main_font;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    column-gap: 20px;
+    max-width: 500px;
+}
+
+input,
+textarea {
+    background-color: $input_field_colour;
+    border: solid $border_colour 1px;
+    @include standardParagraph;
+}
+
+#Message {
+    height: 200px;
+}
+
+.form_field_and_label {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    label {
+        color: $primary_text_colour;
+        font-size: $paragraph_font_size;
+    }
+}
+
+.name_and_email_section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    
+}
+
+
+.phone_numbers_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    span {
+        color: $secondary_text_colour;
+        font-size: $paragraph_font_size;
+        font-style: italic;
+    }
+
+    .add_phone_number_button {
+        background-color: $secondary_accent_colour;
+        border: none;
+        border-radius: 5px;
+        color: $primary_accent_colour;
+        font-size: $paragraph_font_size;
+        font-weight: bold;
+        padding: 10px 30px;
+    }
+}
+
+.address_checkbox_container {
+    .label_checkbox {
+        @include standardParagraph;
+        color: $primary_text_colour;
+        font-weight: bold;
+    }
+}
+
+.address_lines {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.city_and_country_details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .city_county_fields, .postcode_country_fields {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .form_field_and_label {
+        max-width: 100px;
+    }
+}
+.submit_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary_accent_colour;
+    border: none;
+    border-radius: 5px;
+    color: $tertiary_text_colour;
+    font-size: $paragraph_font_size;
+    font-weight: bold;
+    padding: 10px 30px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.submit_icon_container {
+    width: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  
+    .city_and_country_details {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+   
+    }
+
+    .name_and_email_section {
+        .form_field_and_label {
+            width: 100%;
+        }
+    }
+
+    .address_lines {
+        .form_field_and_label {
+            width: 100%;
+        }
+    }
+}

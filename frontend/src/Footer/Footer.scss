@@ -1,0 +1,36 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+
+* {
+    box-sizing: border-box;
+}
+footer { 
+    border-top: solid $border_colour 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+    padding-top: 10px; 
+    p {
+        color: $secondary_text_colour;
+        font-family: $main_font;
+        font-size: $paragraph_font_size;
+    }
+
+    a {
+        color: rgb(180, 180, 184);
+        font-family: $main_font;
+        font-size: $paragraph_font_size;
+    }
+}
+
+@media screen and (max-width:800px){
+    footer{
+        margin-left: 0;
+        margin-right: 0; 
+        justify-content: center;
+    } 
+}

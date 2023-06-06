@@ -1,0 +1,64 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+
+* {
+    box-sizing: border-box;
+}
+
+.card_with_background_image {
+    display: flex;
+    flex-direction: row;
+    background-image:url("../../public/images/shutterstock_1302552622.jpg") ;
+    background-size: 110% auto ;
+    background-position-x: 20%;
+    background-position-y: 15% ;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 400px;
+}
+
+.text_container_card_with_background_image {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around ;
+    max-height: 300px;
+    max-width: 500px;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+    background-color:$additional_background_colour;
+    padding: 20px ;
+
+    h2 {
+        color:$tertiary_text_colour;
+        @include standardTitle;    
+    }
+
+    p {
+        color: $tertiary_text_colour;
+        @include standardParagraph;
+    }
+
+    button {
+        @include lightButton;    
+    }
+
+}
+
+@media screen and (max-width:800px) {
+    .text_container_card_with_background_image {
+        margin-left: $side_margins_mobile;
+        margin-right: $side_margins_mobile; 
+        justify-content: center;
+        
+        button {
+            width: 100%;
+        }
+    }
+
+    .card_with_background_image {
+        background-size: auto 100%;
+        background-position: center;
+    }
+}

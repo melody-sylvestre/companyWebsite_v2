@@ -1,0 +1,73 @@
+@import "../styles/_colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/_margins";
+
+* {
+    box-sizing: border-box;
+}
+
+.plain_text_card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+    h2 {
+        color:$primary_text_colour;
+        @include standardTitle;
+    }
+}
+
+.plain_text_container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly ;
+    flex-wrap: wrap;
+    gap: 20px;
+    
+    p {
+        color: $primary_text_colour;
+        @include standardParagraph;
+        max-width: 300px;
+    }    
+
+    .introduction_text {
+        font-weight: bold;
+    }
+
+}
+
+.link_plain_text{
+    @include darkButton;
+}   
+
+.link_plain_text_container {
+    display: flex;
+    text-align: center;
+}
+
+
+
+
+@media screen and (max-width:800px) {
+    .plain_text_card {
+        margin-left: $side_margins_mobile;
+        margin-right: $side_margins_mobile; 
+        justify-content: center;
+    }
+
+    .plain_text_container {
+        p {
+            max-width: 400px;
+        }
+    }
+    
+    .link_plain_text, .link_plain_text_container {
+        max-width: 400px;
+        width:  100%;
+    }
+}

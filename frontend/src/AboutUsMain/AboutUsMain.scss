@@ -1,0 +1,52 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+* {
+    font-family: $main-font;
+}
+
+.about_us_main{
+    display: flex;
+    flex-direction: column;
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+
+    h1 {
+        @include standardTitle ;
+    }
+
+    h2 {
+        @include standardTitle;
+        font-size: $subtitle_font_size;
+    }
+
+    p{
+        @include standardParagraph;
+    }
+
+    li{
+        @include standardParagraph;
+        font-weight: bold;
+    }
+}
+
+.about_us_important_text {
+    @include standardParagraph;
+    font-weight: bold;
+}
+
+.image_about_us {
+    max-width: 500px;
+    object-fit: cover; 
+    margin: 0 auto;
+}
+
+
+
+@media screen  and (max-width: 800px) {
+    .about_us_main {
+        justify-content: center;
+        margin-left: $side_margins_mobile;
+        margin-right: $side_margins_mobile;
+    }
+}
