@@ -5,6 +5,7 @@ use App\Models\BannerImageModel;
 use Slim\App;
 use Slim\Http\Response as Response;
 use Slim\Http\ServerRequest as Request;
+use Slim\Helper\Set;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -20,7 +21,7 @@ return function (App $app) {
             "Errors" => []
         ];
 
-        return $response->withJson($responseBody)->withStatus(200);
+        return $response->withJson($responseBody)->withStatus(200)->withHeader("Access-Control-Allow-Origin", "*");
         
     });
  
