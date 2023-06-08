@@ -15,7 +15,7 @@ const Banner = () => {
 
     const [bannerContents, setBannerContents] = useState(undefined)
     useEffect(() => {
-        fetch("https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details")
+        fetch("http://0.0.0:8080/banner-details")
             .then(response => response.json())
             .then(data => {
                 setBannerContents(data)

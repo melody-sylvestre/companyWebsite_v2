@@ -1,21 +1,28 @@
 <?php
 declare(strict_types=1);
 
-use App\Controllers\CoursesAPIController;
+use App\Models\BannerImageModel;
 use Slim\App;
-use Slim\Views\PhpRenderer;
-use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use Slim\Http\Response as Response;
+use Slim\Http\ServerRequest as Request;
+use Slim\Helper\Set;
 
 return function (App $app) {
     $container = $app->getContainer();
 
-    //demo code - two ways of linking urls to functionality, either via anon function or linking to a controller
+    $app->get('/banner-details', function (Request $request, Response $response, $args) use ($container) {
+        $bannerImageModel = $container->get(BannerImageModel::class);
+    
+        $bannerImages = $bannerImageModel->getAllImages();
+        $responseBody = 
+        [
+            "Details" => $bannerImages, 
+            "Status" => "1",
+            "Errors" => []
+        ];
 
-    $app->get('/', function ($request, $response, $args) use ($container) {
-        $renderer = $container->get(PhpRenderer::class);
-        return $renderer->render($response, "index.php", $args);
+        return $response->withJson($responseBody)->withStatus(200)->withHeader("Access-Control-Allow-Origin", "*");
+        
     });
-
-    $app->get('/courses', CoursesAPIController::class);
-
+ 
 };
