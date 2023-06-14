@@ -23,7 +23,7 @@ return function (App $app) {
         ];
 
         return $response->withJson($responseBody)->withStatus(200)->withHeader("Access-Control-Allow-Origin", "*");
-        
+        //add error handling for server error (500)
     });
 
     $app->post('/contact-us', ContactMessageController::class);

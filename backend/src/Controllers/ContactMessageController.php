@@ -19,9 +19,10 @@ class ContactMessageController{
     public function __invoke (Request $request, Response $response, $args) 
     {
         $requestBody = $request->getParsedBody();
-        // echo $requestBody;
         //sanitise & validate
-
+        // sanitise all fields
+        // call all the validors
+        // if a validator trigger an exception Exception, return 400 and specific error message
         $validContactMessage = $requestBody;
 
         //post request and return code
