@@ -41,18 +41,32 @@ class ContactMessageController
             $StateCountyIsValid = ContactMessageValidator::validateStateCounty($sanitisedContactMessageForm);
             $PostcodeIsValid = ContactMessageValidator::validatePostcode($sanitisedContactMessageForm);
             $CountryIsValid = ContactMessageValidator::validateCountry($sanitisedContactMessageForm);
-        } catch (\Exception $contactMessageException) {
-            error_log($contactMessageException -> getMessage() . "\n", 3, 'logs/serverlog.log'); 
-            return $response->withStatus(400);
+        
+        } catch (\Exception $contactMessageException) { 
+            $message = $contactMessageException->getMessage(); 
+            error_log($message . "\n", 3, '../logs/serverlog.log');
+            $responseBody = [
+                "Message" => $message,
+                "Details" => []
+            ];
+            return $response->withStatus(400)->withJson($responseBody);
         }
         
         //post request and return code
         try {
             $this->ContactMessageModel->postContactMessage($sanitisedContactMessageForm);
-            return $response->withStatus(200);
+            $responseBody = [
+                "Message" => "Contact form was successfully sent.",
+                "Details" => []
+            ];
+            return $response->withStatus(200)->withJson($responseBody);
 
         } catch (\Exception $exception) {
-            return $response->withStatus(500);
+            $responseBody = [
+                "Message" => "Contact form could not be sent.",
+                "Details" => []
+            ];
+            return $response->withStatus(500)->withJson($responseBody);
         }
                
     }
