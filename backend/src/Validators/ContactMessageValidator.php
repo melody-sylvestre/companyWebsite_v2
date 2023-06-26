@@ -9,7 +9,8 @@ class ContactMessageValidator
 
     public static function validateFullName (array $contactMessage) : bool
     {
-        if($contactMessage["FullName"]!=="" && strlen($contactMessage["FullName"])<= self::MAX_STRING_LENGTH) {
+        // does not support diacritic characters
+        if($contactMessage["FullName"]!=="" && strlen($contactMessage["FullName"])<= self::MAX_STRING_LENGTH && !preg_match("/[^a-zA-z\s\-]/", $contactMessage["FullName"])) {
            return true; 
         } else {
             throw new \Exception("Invalid FullName"); 
