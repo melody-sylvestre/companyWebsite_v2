@@ -35,13 +35,18 @@ class ContactMessageController
             $PhoneNumber3IsValid = ContactMessageValidator::validateAdditionalPhoneNumber($sanitisedContactMessageForm["PhoneNumber3"]);
             $MessageTextIsValid = ContactMessageValidator::validateMessageText($sanitisedContactMessageForm);
             $bIncludeAddressDetailsIsValid = ContactMessageValidator::validatebIncludeAddressDetails($sanitisedContactMessageForm);
-            $AddressLine1IsValid = ContactMessageValidator::validateAddressLine1($sanitisedContactMessageForm);
-            $AddressLine2IsValid = ContactMessageValidator::validateAddressLine2($sanitisedContactMessageForm);
-            $CityTownIsValid = ContactMessageValidator::validateCityTown($sanitisedContactMessageForm);
-            $StateCountyIsValid = ContactMessageValidator::validateStateCounty($sanitisedContactMessageForm);
-            $PostcodeIsValid = ContactMessageValidator::validatePostcode($sanitisedContactMessageForm);
-            $CountryIsValid = ContactMessageValidator::validateCountry($sanitisedContactMessageForm);
-        
+            
+            $mandatoryAddressFields = ["AddressLine1", "CityTown", "Postcode", "Country"];
+            $optionalAddressFields = ["AddressLine2", "StateCounty"];
+            
+            foreach($mandatoryAddressFields as $fieldToValidate) {
+                $isValid = ContactMessageValidator::validateMandatoryAddressField($sanitisedContactMessageForm, $fieldToValidate);
+            }
+
+            foreach($optionalAddressFields as $fieldToValidate) {
+                $isValid = ContactMessageValidator::validateOptionalAddressField($sanitisedContactMessageForm, $fieldToValidate);
+            }
+
         } catch (\Exception $contactMessageException) { 
             $message = $contactMessageException->getMessage(); 
             error_log($message . "\n", 3, '../logs/serverlog.log');
@@ -52,7 +57,6 @@ class ContactMessageController
             return $response->withStatus(400)->withJson($responseBody);
         }
         
-        //post request and return code
         try {
             $this->ContactMessageModel->postContactMessage($sanitisedContactMessageForm);
             $responseBody = [
