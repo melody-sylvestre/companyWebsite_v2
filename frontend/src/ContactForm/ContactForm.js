@@ -2,7 +2,6 @@ import "./ContactForm.scss"
 import { ReactComponent as IconSubmit } from '../SVGImages/Icon_Submit.svg'
 import { useState } from "react"
 
-
 const ContactForm = (props) => {
 
   const [basicFormFields, setBasicFormFields] = useState(
@@ -10,10 +9,12 @@ const ContactForm = (props) => {
       FullName: "",
       EmailAddress: "",
       Message: "",
+      PhoneNumber1: "",
+      PhoneNumber2: "", 
+      PhoneNumber3: ""
     })
 
-  const [phoneNumbers, setPhoneNumbers] = useState([""])
-  const [bIncludeAddressDetails, setBIncludeAddressDetails] = useState(false)
+  const [bIncludeAddressDetails, setBIncludeAddressDetails] = useState(0)
   const [addressDetails, setAddressDetails] = useState(
     {
       AddressLine1: "",
@@ -30,21 +31,11 @@ const ContactForm = (props) => {
     setBasicFormFields(newBasicFormFields)
   }
 
-  const handleChangePhoneNumber = (index, event) => {
-    let newPhoneNumbers = [...phoneNumbers]
-    newPhoneNumbers[index] = event.target.value
-    setPhoneNumbers(newPhoneNumbers)
-  }
-
-  const addPhoneNumberField = () => {
-    setPhoneNumbers([...phoneNumbers, ""])
-  }
-
   const handleAddressCheckBox = (event) => {
     if (event.target.checked) {
-      setBIncludeAddressDetails(true)
+      setBIncludeAddressDetails(1)
     } else {
-      setBIncludeAddressDetails(false)
+      setBIncludeAddressDetails(0)
     }
   }
 
@@ -61,53 +52,50 @@ const ContactForm = (props) => {
     {
       FullName: basicFormFields.FullName,
       EmailAddress: basicFormFields.EmailAddress,
-      Message: basicFormFields.Message,
+      PhoneNumber1: basicFormFields.PhoneNumber1,
+      PhoneNumber2: basicFormFields.PhoneNumber2,
+      PhoneNumber3: basicFormFields.PhoneNumber3,
+      MessageText: basicFormFields.Message,
       bIncludeAddressDetails: bIncludeAddressDetails,
-      AddressDetails: addressDetails
+      AddressLine1: addressDetails.AddressLine1,
+      AddressLine2: addressDetails.AddressLine2,
+      CityTown: addressDetails.CityTown,
+      Postcode: addressDetails.Postcode,
+      StateCounty: addressDetails.StateCounty,
+      Country: addressDetails.Country
     }
-
-    const formLabels =
-    {
-      FullName: "Full name",
-      EmailAddress: "Email address",
-      PhoneNumbers: "Phone number",
-      Message: "Message",
-      bIncludeAddressDetails: "Add address details",
-      "AddressDetails.AddressLine1": "Address line 1",
-      "AddressDetails.AddressLine2": "Address line 2",
-      "AddressDetails.CityTown": "City/Town",
-      "AddressDetails.StateCounty": "State/County",
-      "AddressDetails.Postcode": "Postcode",
-      "AddressDetails.Country": "Country"
-    }
-
-
-    // the API does not accept empty phone numbers - so the PhoneNumbers field should be added 
-    // to the request only if users have entered at least one phone number  
-    let nonEmptyPhoneNumbers = [...phoneNumbers]
-    nonEmptyPhoneNumbers = nonEmptyPhoneNumbers.filter((item) => item.trim() !== "")
-
-    if (nonEmptyPhoneNumbers.length !== 0) {
-      formAnswers.PhoneNumbers = [...nonEmptyPhoneNumbers]
-    }
-
-    fetch("https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit", {
+    // const formLabels =
+    // {
+    //   FullName: "Full name",
+    //   EmailAddress: "Email address",
+    //   PhoneNumbers: "Phone number",
+    //   Message: "Message",
+    //   bIncludeAddressDetails: "Add address details",
+    //   "AddressDetails.AddressLine1": "Address line 1",
+    //   "AddressDetails.AddressLine2": "Address line 2",
+    //   "AddressDetails.CityTown": "City/Town",
+    //   "AddressDetails.StateCounty": "State/County",
+    //   "AddressDetails.Postcode": "Postcode",
+    //   "AddressDetails.Country": "Country"
+    // }
+    fetch("http://0.0.0:8080/contact-us", {
       method: "POST",
       body: JSON.stringify(formAnswers),
       headers: {
-        "Content-Type": 'application/json'
+         "Content-Type": 'application/json', 
+      //   "Access-Control-Allow-origin": "*"
       }
     }).then(response => {
+      console.log(response)
       return response.json()
     }).then(responseBody => {
-      if (responseBody.Status === "1") {
+      if (responseBody.Status === "200") {
         props.setFormSubmitted(true)
       } else {
         props.setFormSubmitted(false)
-        responseBody.Errors.forEach(((error) => {
-          alert(formLabels[error.FieldName] + ": " + error.MessageCode.replaceAll("_", " "))
-        }))
-      }
+        alert(responseBody.Message)
+      } 
+       
     })
   }
 
@@ -125,15 +113,22 @@ const ContactForm = (props) => {
       </div>
 
       <div className="phone_numbers_section">
-        {phoneNumbers.map((element, index) => (
-          <div className="form_field_and_label" key={index}>
-            <label htmlFor={"phone_number_" + (index + 1)}>{index < 9 ? "Phone number 0" + (index + 1) : "Phone number " + (index + 1)} <span> - optional </span></label>
-            <input type="tel" name="phoneNumber" id={"phone_number_" + (index + 1)} value={element || ""} onChange={event => handleChangePhoneNumber(index, event)} />
+          <div className="form_field_and_label">
+            <label htmlFor="phone_number_1">Phone number 01 <span> - with prefix (e.g. +44123456789) </span></label>
+            <input type="tel" name="PhoneNumber1" id="phone_number_1" value={basicFormFields.PhoneNumber1} onChange={event => handleChangeBasicFormFields(event)} />
           </div>
-        ))}
-        <button className="add_phone_number_button" type="button" onClick={() => addPhoneNumberField()}>Add new phone number</button>
-      </div>
 
+          <div className="form_field_and_label">
+            <label htmlFor="phone_number_2">Phone number 02 <span> - optional </span></label>
+            <input type="tel" name="PhoneNumber2" id="phone_number_2" value={basicFormFields.PhoneNumber2} onChange={event => handleChangeBasicFormFields(event)} />
+          </div>
+
+          <div className="form_field_and_label">
+            <label htmlFor="phone_number_3">Phone number 03 <span> - optional </span></label>
+            <input type="tel" name="PhoneNumber3" id="phone_number_3" value={basicFormFields.PhoneNumber3} onChange={event => handleChangeBasicFormFields(event)} />
+          </div>
+      </div>
+          
       <div className="message_section form_field_and_label">
         <label htmlFor="Message">Message</label>
         <textarea name="Message" id="Message" value={basicFormFields.Message || ""} required onChange={event => handleChangeBasicFormFields(event)} />
@@ -190,9 +185,5 @@ const ContactForm = (props) => {
     </form>
   )
 }
-
-
-
-
 
 export default ContactForm
