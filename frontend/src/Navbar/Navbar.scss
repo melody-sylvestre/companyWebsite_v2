@@ -53,10 +53,9 @@ nav {
         
     }
 
-    button{
-        @include lightButton;
-        width: 100px;
-    }    
+   .link_to_social_media {
+    width: 30px;
+   }    
 }
 
 

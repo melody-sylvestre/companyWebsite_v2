@@ -13,7 +13,7 @@ const Navbar = () => {
                 <Link to="/" className="link">HOME</Link>
                 <Link to="/about-us" className="link">ABOUT US</Link>
                 <Link to="/contact-us" className="link">CONTACT US</Link>
-                <button>Log in</button>
+                <a href="https://www.linkedin.com/in/melody-sylvestre/"><img className="link_to_social_media" src="images/linkedin.png" alt="LinkedIn logo"/></a>
             </div>
         </nav>
     )
