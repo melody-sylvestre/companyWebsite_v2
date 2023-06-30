@@ -16,10 +16,10 @@ const TextNextToImageCard = () => {
                     <li>Sed asperiores distinctio et obcaecati quia id placeat commodi.</li>
                     
                 </ul>
-                <button>Learn more</button>
+                <Link id="main_link" to="/about-us">Learn more</Link>
                 
             </div>
-            <img src="images/shutterstock_696636415.jpg" alt="An office space" className="card_image"/>
+            <img src="images/peacock-feather.jpg" alt="A peacock feather" className="card_image"/>
         </div>
     )
 }

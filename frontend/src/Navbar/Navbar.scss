@@ -20,8 +20,23 @@ nav {
 }
 
 .logo_container {
-    width: 175px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    img {
+        height: 50px;
+    }
+    
+    span {
+        color: $primary_accent_colour;
+        font-family: 'Caprasimo', cursive;
+        font-size: 40px;
+        font-weight: bold;
+    }
 }
+
 
 .links_container {
     align-items: center;
