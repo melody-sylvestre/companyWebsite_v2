@@ -12,27 +12,30 @@ nav {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    gap: 5px;
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-left: $left_margin_desktop;
     margin-right: $right_margin_desktop;
+    margin-bottom: 20px;
+
 }
 
 .logo_container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
     img {
-        height: 50px;
+        height: 30px;
     }
     
     span {
         color: $primary_accent_colour;
         font-family: 'Caprasimo', cursive;
-        font-size: 40px;
+        font-size: 30px;
         font-weight: bold;
     }
 }
@@ -44,6 +47,7 @@ nav {
     flex-direction: row;
     justify-content: space-evenly;
     width: 350px;
+    gap: 5px;
 
     .link{
         color: $primary_text_colour;
