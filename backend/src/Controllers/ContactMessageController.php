@@ -54,9 +54,9 @@ class ContactMessageController
             $message = $contactMessageException->getMessage();
             error_log($message . "\n", 3, '../logs/serverlog.log');
             $responseBody = [
-                "Message" => $message,
                 "Details" => [],
-                "Status" => '400'
+                "Status" => '400',
+                "Message" => $message,
             ];
             return $response->withStatus(400)->withJson($responseBody);
         }
@@ -64,16 +64,17 @@ class ContactMessageController
         try {
             $this->ContactMessageModel->postContactMessage($sanitisedContactMessageForm);
             $responseBody = [
-                "Message" => "Contact form was successfully sent.",
                 "Details" => [],
-                "Status" => "200"
+                "Status" => "200",
+                "Message" => "Contact form was successfully sent."
             ];
             return $response->withStatus(200)->withJson($responseBody);
         } catch (\Exception $exception) {
+            error_log("Contact form could not be sent due to server error\n", 3, '../logs/serverlog.log');
             $responseBody = [
-                "Message" => "Contact form could not be sent.",
                 "Details" => [],
-                "Status" => "500"
+                "Status" => "500",
+                "Message" => "Contact form could not be sent."
             ];
             return $response->withStatus(500)->withJson($responseBody);
         }
