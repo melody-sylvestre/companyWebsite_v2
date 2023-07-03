@@ -38,9 +38,10 @@
         font-weight: bold;
     }
 
-    button {
-        @include darkButton;    
-    }
+}
+
+#main_link{
+    @include darkButton;    
 }
 
 .card_image {

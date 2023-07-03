@@ -6,24 +6,29 @@
     box-sizing: border-box;
 }
 footer { 
-    border-top: solid $border_colour 1px;
     display: flex;
+    align-items: center;
+    border-top: solid $border_colour 1px;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
     margin-left: $left_margin_desktop;
     margin-right: $right_margin_desktop;
+    margin-top: 20px;
+    min-width: auto;
     padding-top: 10px; 
-    p {
+    
+    .additional_credits {
         color: $secondary_text_colour;
         font-family: $main_font;
-        font-size: $paragraph_font_size;
+        font-size: $paragraph_font_size;    
     }
 
-    a {
-        color: rgb(180, 180, 184);
+    .main_credits{
+        color: $secondary_text_colour;
         font-family: $main_font;
-        font-size: $paragraph_font_size;
+        font-size: $subtitle_font_size;
     }
 }
 

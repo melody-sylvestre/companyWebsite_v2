@@ -19,6 +19,12 @@
         color:$primary_text_colour;
         @include standardTitle;
     }
+
+    h3 {
+       color: $primary_text_colour;
+       font-weight: bold;
+       font-size: $subtitle_font_size; 
+    }
 }
 
 .plain_text_container {
@@ -32,7 +38,8 @@
     p {
         color: $primary_text_colour;
         @include standardParagraph;
-        max-width: 300px;
+        max-width: 30%;
+        min-width: 200px;
     }    
 
     .introduction_text {
@@ -49,8 +56,6 @@
     display: flex;
     text-align: center;
 }
-
-
 
 
 @media screen and (max-width:800px) {

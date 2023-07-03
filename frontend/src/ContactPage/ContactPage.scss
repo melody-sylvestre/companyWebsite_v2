@@ -1,0 +1,59 @@
+@import "../styles/colours";
+@import "../styles/fontsAndTextStyles";
+@import "../styles/margins";
+
+* {
+    font-family: $main_font;
+}
+
+.contact_main {
+    margin-left: $left_margin_desktop;
+    margin-right: $right_margin_desktop;
+
+    h1 {
+        color: $primary_text_colour;
+        @include standardTitle
+    }
+
+}
+
+.contact_image_and_textbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.contact_text_container {
+    max-width: 500px;
+
+    p {
+        color: $primary_text_colour;
+        @include standardParagraph;
+        font-weight: bold;
+        padding-bottom: 20px;
+    }
+}
+
+.side_image {
+    object-fit: cover;
+    max-height: 500px;
+    max-width: 400px;
+}
+
+@media screen and (max-width:800px) {
+    .side_image {
+        display: none;
+    }
+
+    .contact_main {
+        margin-left: $side_margins_mobile;
+        margin-right: $side_margins_mobile;
+    }
+
+    .contact_text_container {
+        max-width: 100%;
+    }
+}
